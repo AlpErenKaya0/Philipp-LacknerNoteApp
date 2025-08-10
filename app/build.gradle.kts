@@ -89,10 +89,6 @@ dependencies {
 // Hilt core
     ksp(libs.hilt.compiler)
 
-// Hilt ViewModel için
-    implementation(libs.androidx.hilt.lifecycle.viewmodel)
-    ksp(libs.androidx.hilt.compiler)
-
 
 // Room
     implementation(libs.androidx.room.runtime)
