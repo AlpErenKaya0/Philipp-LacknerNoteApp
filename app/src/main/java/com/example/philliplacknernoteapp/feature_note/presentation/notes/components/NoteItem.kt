@@ -32,28 +32,32 @@ import com.example.philliplacknernoteapp.feature_note.domain.model.Note
 fun NoteItem(
     note: Note,
     modifier: Modifier = Modifier,
-    cornerRadius : Dp = 10.dp,
+    cornerRadius: Dp = 10.dp,
     cutCornerSize: Dp = 30.dp,
     onDeleteClick: () -> Unit
 ) {
     Box(
         modifier = modifier
-    ){
-        Canvas(modifier = Modifier.matchParentSize()){
-            val clipPath = Path().apply{
+    ) {
+        Canvas(modifier = Modifier.matchParentSize()) {
+            val clipPath = Path().apply {
                 lineTo(size.width - cutCornerSize.toPx(), 0f)
+                lineTo(size.width, cutCornerSize.toPx())
                 lineTo(size.width, size.height)
                 lineTo(0f, size.height)
                 close()
             }
-            clipPath(clipPath){
+
+            clipPath(clipPath) {
                 drawRoundRect(
                     color = Color(note.color),
                     size = size,
                     cornerRadius = CornerRadius(cornerRadius.toPx())
                 )
                 drawRoundRect(
-                    color = Color(ColorUtils.blendARGB(note.color, 0x000000, 0.2f)),
+                    color = Color(
+                        ColorUtils.blendARGB(note.color, 0x000000, 0.2f)
+                    ),
                     topLeft = Offset(size.width - cutCornerSize.toPx(), -100f),
                     size = Size(cutCornerSize.toPx() + 100f, cutCornerSize.toPx() + 100f),
                     cornerRadius = CornerRadius(cornerRadius.toPx())
@@ -65,23 +69,19 @@ fun NoteItem(
                 .fillMaxSize()
                 .padding(16.dp)
                 .padding(end = 32.dp)
-            ,
-
         ) {
             Text(
                 text = note.title,
                 style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.inverseOnSurface,
+                color = MaterialTheme.colorScheme.onSurface,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
-
             Spacer(modifier = Modifier.height(8.dp))
-
             Text(
                 text = note.content,
                 style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.inverseOnSurface,
+                color = MaterialTheme.colorScheme.onSurface,
                 maxLines = 10,
                 overflow = TextOverflow.Ellipsis
             )
@@ -91,8 +91,9 @@ fun NoteItem(
             modifier = Modifier.align(Alignment.BottomEnd)
         ) {
             Icon(
-                imageVector = Icons.Default.Delete ,
-                contentDescription= "Delete Note"
+                imageVector = Icons.Default.Delete,
+                contentDescription = "Delete note",
+                tint = MaterialTheme.colorScheme.onSurface
             )
         }
     }

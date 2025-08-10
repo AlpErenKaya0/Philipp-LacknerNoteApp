@@ -46,8 +46,8 @@ fun NotesScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    // TODO: navigate to add/edit note screen
-                },
+navController.navigate("add_edit_note_screen")
+                          },
                 containerColor = MaterialTheme.colors.primary
             ) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add note")
